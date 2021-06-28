@@ -1,0 +1,28 @@
+\documentclass[english]{article}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{float}
+\input{../analysis/output/numbersfortext.tex}
+\date{}
+
+\begin{document}
+\title{Cars analysis}
+
+\maketitle
+
+The average fuel economy of cars in our data is $\meanMPG$ miles
+per gallon.
+
+\section{Regressions of car weight on length}
+
+\begin{table}[H]
+\caption{Association between car weight and length\textbf{\label{tab:AssocWeightLength}}}
+\begin{centering}
+\input{../analysis/output/car_weight_regs.tex}
+\par
+\end{centering}
+\medskip{}
+{\small{}Notes: TK}
+\end{table}
+
+\end{document}
