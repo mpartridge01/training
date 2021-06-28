@@ -29,8 +29,8 @@ foreach pkg in estout esttab{
 	}
 
 ** Declare global (Note: change this to your local path if it differs)
-if "`c(os)'" == "MacOSX" global github = "C:/Users/`c(username)'/Documents/GitHub/training"
-else global github = "/Users/`c(username)'/Documents/GitHub/training"
+if "`c(os)'" == "MacOSX" global github = "/Users/`c(username)'/Documents/GitHub/training"
+else global github = "C:/Users/`c(username)'/Documents/GitHub/training"
 
 ** Load data
 sysuse auto, clear // use example dataset that comes with Stata
