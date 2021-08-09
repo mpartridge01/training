@@ -11,7 +11,7 @@ purposes.
 cap program drop latex_write
 program define latex_write
 	* Arguments: (1) name of the command, (2) content of the command
-	if "`c(os)'" == "MacOSX" local command '\newcommand{\\`1'}{`2'}'
+	if "`c(os)'" == "MacOSX" local command '\\newcommand{\\`1'}{`2'}'
 	else local command \newcommand{\\`1'}{`2'}
 	! echo `command'  >> "$github/analysis/output/numbersfortext.tex"
 end
