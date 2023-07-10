@@ -43,7 +43,6 @@ drop make2 make3 // removes old model variables before combined
 rename make make_and_model // keeps make and model together in case is needed
 rename make1 make // the make variable is now only the car manufacturer
 
-
 ** Store the mean MPG
 sum mpg
 local mean : di %3.1f r(mean) // format so one decimal place is showing
