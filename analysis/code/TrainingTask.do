@@ -35,6 +35,15 @@ else global github = "C:/Users/`c(username)'/Documents/GitHub/training"
 ** Load data
 sysuse auto, clear // use example dataset that comes with Stata
 
+** Create a new make variable that only includes the make of the car, not the model (also create new model variable)
+split make, p(" ") // splits the variable by everyword with a space in between
+gen model = make2 + " " + make3 // creates the model variable
+replace model=trim(model) // removes spaces at beginning or end of model variable
+drop make2 make3 // removes old model variables before combined
+rename make make_and_model // keeps make and model together in case is needed
+rename make1 make // the make variable is now only the car manufacturer
+
+
 ** Store the mean MPG
 sum mpg
 local mean : di %3.1f r(mean) // format so one decimal place is showing
@@ -46,8 +55,8 @@ reg weight length, r
 eststo spec1
 estadd local typefe "No" // note whether car type fixed effects are included
 
-** Run a regression of car weight on length, with car type fixed effects
-reg weight length i.foreign, r
+** Run a regression of car weight on length, with make(manufacturer) fixed effects
+reg weight length, absorb(make) r
 eststo spec2
 estadd local typefe "Yes"
 
@@ -56,5 +65,5 @@ esttab spec2 spec1 using "$github/analysis/output/car_weight_regs.tex", ///
 	replace se nonote numbers b(%8.2f) se(%8.2f) ///
 	keep(length) nomtitles star(* 0.10 ** 0.05 *** 0.01) ///
 	varlabels(length "Car length (inches)") ///
-	stats(typefe r2 N, l("Car type fixed effects" "\$R^{2}$" "Observations") ///
+	stats(typefe r2 N, l("Car manufacturer (make) fixed effects" "\$R^{2}$" "Observations") ///
 	fmt(%8.0fc %8.2fc %8.0fc))
